@@ -1,5 +1,6 @@
 # Summary
 
 * [概述](README.md)
-* [First Chapter](chapter1.md)
+* [cancelAnimationFrame方法](chapter1.md)
+* [实例](shi-li.md)
 

@@ -10,3 +10,37 @@ requestAnimationFrame的优势，在于充分利用显示器的刷新机制，�
 
 requestAnimationFrame使用一个回调函数作为参数。这个回调函数会在浏览器重绘之前调用。
 
+```
+requestID = window.requestAnimationFrame(callback); 
+```
+
+ 目前，主要浏览器Firefox 23 / IE 10 / Chrome / Safari）都支持这个方法。可以用下面的方法，检查浏览器是否支持这个API。如果不支持，则自行模拟部署该方法。
+
+```
+window.requestAnimFrame = (function(){
+      return  window.requestAnimationFrame       || 
+              window.webkitRequestAnimationFrame || 
+              window.mozRequestAnimationFrame    || 
+              window.oRequestAnimationFrame      || 
+              window.msRequestAnimationFrame     || 
+              function( callback ){
+                window.setTimeout(callback, 1000 / 60);
+              };
+    })();
+```
+
+上面的代码按照1秒钟60次（大约每16.7毫秒一次），来模拟requestAnimationFrame。
+
+使用requestAnimationFrame的时候，只需反复调用它即可。
+
+```
+function repeatOften() {
+  // Do whatever
+  requestAnimationFrame(repeatOften);
+}
+
+requestAnimationFrame(repeatOften);
+```
+
+
+
